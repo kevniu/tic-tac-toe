@@ -23,10 +23,10 @@ $(document).ready(function() {
         if (board[row][col] == board[row - 1][col] &&
             board[row - 1][col] == board[row - 2][col]) {
             win = true
-            if (win == true && isOdd(playerTurn) == false) {
+            if (win == true && isOdd(playerTurn) == true) {
                 alert("X Wins!")
                 location.reload();
-            } else if (win == true && isOdd(playerTurn) == true) {
+            } else if (win == true && isOdd(playerTurn) == false) {
                 alert("O Wins!")
                 location.reload();
             }
@@ -47,9 +47,9 @@ $(document).ready(function() {
         }
     }
 
-    function rdiagonalCheck(board, col, row) {
+    function diagonalCheck(board, col, row) {
         diagonal = []
-        for (var i = -3; i < 3; i++) {
+        for (var i = -2; i < 2; i++) {
             try {
                 if (board[row + i][col + i] === "undefined") {} else {
                     diagonal.push(board[row + i][col + i])
@@ -70,7 +70,7 @@ $(document).ready(function() {
 
     function invDiagonalCheck(board, col, row) {
         invDiagonal = []
-        for (var i = -3; i < 3; i++) {
+        for (var i = -2; i < 2; i++) {
             try {
                 if (board[row + (-i)][col + i] === "undefined") {} else {
                     invDiagonal.push(board[row + (-i)][col + i])
@@ -100,12 +100,12 @@ $(document).ready(function() {
         e.preventDefault();
         playerTurn += 1
         if (isOdd(playerTurn) == true) {
-            $('#row' + col1Counter + ' #col1').html("<img src='assets/x.png' height='150px' width='150px'>");
+            $('#row' + col1Counter + ' #col1').html("<img src='assets/x.png' height='180px' width='180px'>");
             col1Counter += 1
             board[(col1Counter - 2)][0] = "X"
             checkWin(board, 0, (col1Counter - 2))
         } else if (isOdd(playerTurn) == false) {
-            $('#row' + col1Counter + ' #col1').append("<img src='assets/o.png' height='150px' width='150px'>");
+            $('#row' + col1Counter + ' #col1').append("<img src='assets/o.png' height='180px' width='180px'>");
             col1Counter += 1
             board[(col1Counter - 2)][0] = "O"
             checkWin(board, 0, (col1Counter - 2))
@@ -116,28 +116,28 @@ $(document).ready(function() {
         e.preventDefault();
         playerTurn += 1
         if (isOdd(playerTurn) == true) {
-            $('#row' + col2Counter + ' #col2').append("<img src='assets/x.png' height='150px' width='150px'>");
+            $('#row' + col2Counter + ' #col2').append("<img src='assets/x.png' height='180px' width='180px'>");
             col2Counter += 1
             board[(col2Counter - 2)][1] = "X"
             checkWin(board, 1, (col2Counter - 2))
         } else if (isOdd(playerTurn) == false) {
-            $('#row' + column2_counter + ' #col2').append("<img src='assets/o.png' height='150px' width='150px'>");
+            $('#row' + col2Counter + ' #col2').append("<img src='assets/o.png' height='180px' width='180px'>");
             col2Counter += 1
             board[(col2Counter - 2)][1] = "O"
             checkWin(board, 1, (col2Counter - 2))
         }
     })
 
-    $('#col3.squares').click(function(e) {
+    $('#col3.square').click(function(e) {
         e.preventDefault();
         playerTurn += 1
         if (isOdd(playerTurn) == true) {
-            $('#row' + col3Counter + ' #col3').append("<img src='assets/x.png' height='150px' width='150px'>");
+            $('#row' + col3Counter + ' #col3').append("<img src='assets/x.png' height='180px' width='180px'>");
             col3Counter += 1
             board[(col3Counter - 2)][2] = "X"
             checkWin(board, 2, (col3Counter - 2))
         } else if (isOdd(playerTurn) == false) {
-            $('#row' + col3Counter + ' #col3').append("<img src='assets/o.png' height='150px' width='150px'>");
+            $('#row' + col3Counter + ' #col3').append("<img src='assets/o.png' height='180px' width='180px'>");
             col3Counter += 1
             board[(col3Counter - 2)][2] = "O"
             checkWin(board, 2, (col3Counter - 2))
