@@ -1,0 +1,17 @@
+.board {
+  /*width: 50%;*/
+  width: 600px;
+  height: 600px;
+  text-align: center;
+  background-color: black;
+  position: relative;
+  margin: auto;
+}
+
+.square {
+  background-color: white;
+  background-size: cover;
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+}
