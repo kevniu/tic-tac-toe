@@ -1,9 +1,6 @@
 $(document).ready(function() {
-    var win = false
-    var playerTurn = 1
-    var col1Counter = 1
-    var col2Counter = 1
-    var col3Counter = 1
+    var win = false;
+    var playerTurn = 1;
 
     var board = [
         ["0", "0", "0"],
@@ -13,13 +10,13 @@ $(document).ready(function() {
 
     function isOdd(num) {
         if (num % 2 == 1) {
-            return true
+            return true;
         } else {
-            return false
+            return false;
         }
     }
 
-    function verticalCheck(board, col, row) {
+    function verticalCheck(board, row, col) {
         if (board[row][col] == board[row - 1][col] &&
             board[row - 1][col] == board[row - 2][col]) {
             win = true
@@ -47,100 +44,164 @@ $(document).ready(function() {
         }
     }
 
-    function diagonalCheck(board, col, row) {
-        diagonal = []
-        for (var i = -2; i < 2; i++) {
-            try {
-                if (board[row + i][col + i] === "undefined") {} else {
-                    diagonal.push(board[row + i][col + i])
-                }
-            } catch (e) {}
+    function diagonalCheck(board) {
+        if (board[0][0] == board[1][1] &&
+            board[1][1] == board[2][2]) {
+              win = true;
         }
-        var diagonalContent = diagonal.join('')
-        if (diagonalContent.includes("XXX") == true) {
-            win = true
-            alert("X Wins!")
+        if (win == true && isOdd(playerTurn) == true) {
+            alert("X Wins!");
             location.reload();
-        } else if (diagonalContent.includes("OOO") == true) {
-            win = true
-            alert("O Wins!")
+        } else if (win == true && isOdd(playerTurn) == false) {
+            alert("O Wins!");
             location.reload();
         }
     }
 
-    function invDiagonalCheck(board, col, row) {
-        invDiagonal = []
-        for (var i = -2; i < 2; i++) {
-            try {
-                if (board[row + (-i)][col + i] === "undefined") {} else {
-                    invDiagonal.push(board[row + (-i)][col + i])
-                }
-            } catch (e) {}
+    function invDiagonalCheck(board) {
+        if (board[0][0] == board[1][1] &&
+            board[1][1] == board[2][2]) {
+              win = true;
         }
-        var invDiagonalContent = invDiagonal.join('')
-        if (invDiagonalContent.includes("XXX") == true) {
-            win = true
-            alert("X Wins!")
+        if (win == true && isOdd(playerTurn) == true) {
+            alert("X Wins!");
             location.reload();
-        } else if (invDiagonalContent.includes("OOO") == true) {
-            win = true
-            alert("O Wins!")
+        } else if (win == true && isOdd(playerTurn) == false) {
+            alert("O Wins!");
             location.reload();
         }
     }
 
-    function checkWin(board, col, row){
+    function checkWin(board, row, col){
       horizontalCheck(board, row)
-      diagonalCheck(board, col, row)
-      invDiagonalCheck(board, col, row)
-      verticalCheck(board, col, row)
+      diagonalCheck(board)
+      invDiagonalCheck(board)
+      verticalCheck(board, row, col)
     }
 
-    $('#col1.square').click(function(e) {
+    $('#sq1.square').click(function(e) {
         e.preventDefault();
         playerTurn += 1
         if (isOdd(playerTurn) == true) {
-            $('#row' + col1Counter + ' #col1').html("<img src='assets/x.png' height='180px' width='180px'>");
-            col1Counter += 1
-            board[(col1Counter - 2)][0] = "X"
-            checkWin(board, 0, (col1Counter - 2))
+            $('#sq1').append("<img src='assets/x.png' height='180px' width='180px'>");
+            board[0][0] = "X";
+            checkWin(board, 0, 0);
         } else if (isOdd(playerTurn) == false) {
-            $('#row' + col1Counter + ' #col1').append("<img src='assets/o.png' height='180px' width='180px'>");
-            col1Counter += 1
-            board[(col1Counter - 2)][0] = "O"
-            checkWin(board, 0, (col1Counter - 2))
+            $('#sq1').append("<img src='assets/o.png' height='180px' width='180px'>");
+            board[0][0] = "O";
+            checkWin(board, 0, 0);
         }
     })
 
-    $('#col2.square').click(function(e) {
+    $('#sq2.square').click(function(e) {
         e.preventDefault();
         playerTurn += 1
         if (isOdd(playerTurn) == true) {
-            $('#row' + col2Counter + ' #col2').append("<img src='assets/x.png' height='180px' width='180px'>");
-            col2Counter += 1
-            board[(col2Counter - 2)][1] = "X"
-            checkWin(board, 1, (col2Counter - 2))
+            $('#sq2').append("<img src='assets/x.png' height='180px' width='180px'>");
+            board[0][1] = "X";
+            checkWin(board, 0, 1);
         } else if (isOdd(playerTurn) == false) {
-            $('#row' + col2Counter + ' #col2').append("<img src='assets/o.png' height='180px' width='180px'>");
-            col2Counter += 1
-            board[(col2Counter - 2)][1] = "O"
-            checkWin(board, 1, (col2Counter - 2))
+            $('#sq2').append("<img src='assets/o.png' height='180px' width='180px'>");
+            board[0][1] = "O";
+            checkWin(board, 0, 1);
         }
     })
 
-    $('#col3.square').click(function(e) {
+    $('#sq3.square').click(function(e) {
         e.preventDefault();
         playerTurn += 1
         if (isOdd(playerTurn) == true) {
-            $('#row' + col3Counter + ' #col3').append("<img src='assets/x.png' height='180px' width='180px'>");
-            col3Counter += 1
-            board[(col3Counter - 2)][2] = "X"
-            checkWin(board, 2, (col3Counter - 2))
+            $('#sq3').append("<img src='assets/x.png' height='180px' width='180px'>");
+            board[0][2] = "X";
+            checkWin(board, 0, 2);
         } else if (isOdd(playerTurn) == false) {
-            $('#row' + col3Counter + ' #col3').append("<img src='assets/o.png' height='180px' width='180px'>");
-            col3Counter += 1
-            board[(col3Counter - 2)][2] = "O"
-            checkWin(board, 2, (col3Counter - 2))
+            $('#sq3').append("<img src='assets/o.png' height='180px' width='180px'>");
+            board[0][2] = "O";
+            checkWin(board, 0, 2);
+        }
+    })
+
+    $('#sq4.square').click(function(e) {
+        e.preventDefault();
+        playerTurn += 1
+        if (isOdd(playerTurn) == true) {
+            $('#sq4').append("<img src='assets/x.png' height='180px' width='180px'>");
+            board[1][0] = "X";
+            checkWin(board, 1, 0);
+        } else if (isOdd(playerTurn) == false) {
+            $('#sq4').append("<img src='assets/o.png' height='180px' width='180px'>");
+            board[1][0] = "O";
+            checkWin(board, 1, 0);
+        }
+    })
+
+    $('#sq5.square').click(function(e) {
+        e.preventDefault();
+        playerTurn += 1
+        if (isOdd(playerTurn) == true) {
+            $('#sq5').append("<img src='assets/x.png' height='180px' width='180px'>");
+            board[1][1] = "X";
+            checkWin(board, 1, 2);
+        } else if (isOdd(playerTurn) == false) {
+            $('#sq5').append("<img src='assets/o.png' height='180px' width='180px'>");
+            board[1][1] = "O";
+            checkWin(board, 1, 1);
+        }
+    })
+
+    $('#sq6.square').click(function(e) {
+        e.preventDefault();
+        playerTurn += 1
+        if (isOdd(playerTurn) == true) {
+            $('#sq6').append("<img src='assets/x.png' height='180px' width='180px'>");
+            board[1][2] = "X";
+            checkWin(board, 1, 2);
+        } else if (isOdd(playerTurn) == false) {
+            $('#sq6').append("<img src='assets/o.png' height='180px' width='180px'>");
+            board[1][2] = "O";
+            checkWin(board, 1, 2);
+        }
+    })
+
+    $('#sq7.square').click(function(e) {
+        e.preventDefault();
+        playerTurn += 1
+        if (isOdd(playerTurn) == true) {
+            $('#sq7').append("<img src='assets/x.png' height='180px' width='180px'>");
+            board[2][0] = "X";
+            checkWin(board, 2, 0);
+        } else if (isOdd(playerTurn) == false) {
+            $('#sq7').append("<img src='assets/o.png' height='180px' width='180px'>");
+            board[2][0] = "O";
+            checkWin(board, 2, 0);
+        }
+    })
+
+    $('#sq8.square').click(function(e) {
+        e.preventDefault();
+        playerTurn += 1
+        if (isOdd(playerTurn) == true) {
+            $('#sq8').append("<img src='assets/x.png' height='180px' width='180px'>");
+            board[2][1] = "X";
+            checkWin(board, 2, 1);
+        } else if (isOdd(playerTurn) == false) {
+            $('#sq8').append("<img src='assets/o.png' height='180px' width='180px'>");
+            board[2][1] = "O";
+            checkWin(board, 2, 1);
+        }
+    })
+
+    $('#sq9.square').click(function(e) {
+        e.preventDefault();
+        playerTurn += 1
+        if (isOdd(playerTurn) == true) {
+            $('#sq9').append("<img src='assets/x.png' height='180px' width='180px'>");
+            board[2][2] = "X";
+            checkWin(board, 2, 2);
+        } else if (isOdd(playerTurn) == false) {
+            $('#sq9').append("<img src='assets/o.png' height='180px' width='180px'>");
+            board[2][2] = "O";
+            checkWin(board, 2, 2);
         }
     })
 
